@@ -17,10 +17,10 @@ router.get('/message', function (req, res) {
   res.send('Lista de mensajes')
 })
 
-router.delete('/message', function (req, res) {
+router.post('/message', function (req, res) {
   console.log(req.query)
   console.log(req.body)
-  res.send('Mensaje eliminado correctamente: ' + req.body.text)
+  res.status(201).send([{error: '', body: 'Creado correctamente'}])
 })
 
 app.listen(3000)
