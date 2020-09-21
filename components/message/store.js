@@ -1,11 +1,23 @@
-const list = [];
+const db = require('mongoose')
+const Model = require('./model')
+const { config } = require('../../config/index')
+
+const uri = `mongodb://${config.dbUser}:${config.dbPassword}@${config.dbHost}/${config.dbName}?ssl=true&replicaSet=atlas-14jn7z-shard-0&authSource=admin&retryWrites=true&w=majority`
+
+db.Promise = global.Promise
+
+db.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+
+console.log('[db] Conectada con éxito')
 
 function addMessage(message) {
-  list.push(message)
+  const myMessage = new Model(message)
+  myMessage.save()
 }
 
-function getMessage() {
-  return list
+async function getMessage() {
+  const messages = await Model.find()
+  return messages
 }
 
 module.exports = {
