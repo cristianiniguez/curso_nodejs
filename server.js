@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const server = require('http').Server(app)
 
+const cors = require('cors')
 const bodyParser = require('body-parser')
 const socket = require('./socket')
 const db = require('./db')
@@ -10,6 +11,8 @@ const router = require('./network/routes')
 
 const url = `mongodb://${config.dbUser}:${config.dbPassword}@${config.dbHost}/${config.dbName}?ssl=true&replicaSet=atlas-14jn7z-shard-0&authSource=admin&retryWrites=true&w=majority`
 db(url)
+
+app.use(cors())
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
