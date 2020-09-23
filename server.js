@@ -21,8 +21,8 @@ socket.connect(server)
 
 router(app)
 
-app.use('/app', express.static('public'))
+app.use(config.publicRoute, express.static('public'))
 
-server.listen(3000, function () {
-  console.log('La aplicación está escuchando en http://localhost:3000')
+server.listen(config.port, function () {
+  console.log(`La aplicación está escuchando en ${config.host}:${config.port}`)
 })

@@ -1,4 +1,5 @@
 const store = require('./store')
+const { config } = require('../../config/index')
 const { socket } = require('../../socket')
 
 function addMessage(chat, user, message, file) {
@@ -10,7 +11,7 @@ function addMessage(chat, user, message, file) {
     }
     let fileUrl = ''
     if (file) {
-      fileUrl = 'http://localhost:3000/app/files/' + file.filename;
+      fileUrl = `${config.host}:${config.port}${config.publicRoute}/${config.filesRoute}/${file.filename}`
     }
     const fullMessage = {
       chat: chat,
