@@ -1,4 +1,3 @@
-const { populate } = require('../user/model')
 const Model = require('./model')
 
 function addMessage(message) {
